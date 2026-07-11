@@ -1,0 +1,493 @@
+<title>Kewa — Asal Dianat · Styling &amp; Couture</title>
+<style>
+  :root {
+    --ground: #FAF9F6;
+    --ground-2: #F1EDE8;
+    --ink: #221A1C;
+    --ink-soft: #5C5250;
+    --line: #DDD5CF;
+    --accent: #8C2F39;
+    --accent-ink: #FAF9F6;
+    --rose: #C9A9A0;
+    --plate-a: #C9A9A0;
+    --plate-b: #8A7C76;
+    --plate-c: #3E3234;
+    --plate-d: #A8553F;
+    --display: "Didot", "Bodoni MT", "Bodoni 72", "Playfair Display", Georgia, serif;
+    --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #1B1517;
+      --ground-2: #241C1E;
+      --ink: #F0E9E4;
+      --ink-soft: #A99C97;
+      --line: #3B3134;
+      --accent: #C96B72;
+      --accent-ink: #1B1517;
+      --rose: #8A6A63;
+      --plate-a: #6E5550;
+      --plate-b: #55483F;
+      --plate-c: #2E2528;
+      --plate-d: #7A4234;
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #FAF9F6;
+    --ground-2: #F1EDE8;
+    --ink: #221A1C;
+    --ink-soft: #5C5250;
+    --line: #DDD5CF;
+    --accent: #8C2F39;
+    --accent-ink: #FAF9F6;
+    --rose: #C9A9A0;
+    --plate-a: #C9A9A0;
+    --plate-b: #8A7C76;
+    --plate-c: #3E3234;
+    --plate-d: #A8553F;
+  }
+  :root[data-theme="dark"] {
+    --ground: #1B1517;
+    --ground-2: #241C1E;
+    --ink: #F0E9E4;
+    --ink-soft: #A99C97;
+    --line: #3B3134;
+    --accent: #C96B72;
+    --accent-ink: #1B1517;
+    --rose: #8A6A63;
+    --plate-a: #6E5550;
+    --plate-b: #55483F;
+    --plate-c: #2E2528;
+    --plate-d: #7A4234;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  .label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- header ---------- */
+  header {
+    border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--ground) 92%, transparent);
+    backdrop-filter: blur(8px);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px; max-width: 1120px; margin: 0 auto;
+  }
+  .brand {
+    font-family: var(--display);
+    font-size: 22px; letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 84px 0 72px; border-bottom: 1px solid var(--line); }
+  .hero .eyebrow {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 28px;
+  }
+  .hero .eyebrow::after {
+    content: ""; height: 1px; flex: 1; background: var(--line);
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(64px, 13vw, 168px);
+    line-height: 0.94;
+    letter-spacing: 0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 .amp { color: var(--accent); font-style: italic; }
+  .hero-foot {
+    display: flex; flex-wrap: wrap; gap: 32px;
+    align-items: flex-end; justify-content: space-between;
+    margin-top: 40px;
+  }
+  .hero-thesis {
+    max-width: 44ch; margin: 0;
+    font-size: 18px; color: var(--ink-soft);
+  }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 13px 26px;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    text-decoration: none; border: 1px solid var(--ink);
+    background: transparent; color: var(--ink);
+    cursor: pointer; transition: background 0.2s, color 0.2s;
+  }
+  .btn:hover { background: var(--ink); color: var(--ground); }
+  .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn.solid:hover { background: var(--ink); border-color: var(--ink); color: var(--ground); }
+
+  /* ---------- sections ---------- */
+  section { padding: 72px 0; }
+  .sec-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap; margin-bottom: 36px;
+  }
+  h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(34px, 5vw, 52px);
+    line-height: 1.05;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  /* ---------- work ---------- */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    font-family: var(--body);
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 9px 18px; border: 1px solid var(--line);
+    background: transparent; color: var(--ink-soft);
+    border-radius: 999px; cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .chip:hover { border-color: var(--ink); color: var(--ink); }
+  .chip[aria-pressed="true"] {
+    background: var(--ink); border-color: var(--ink); color: var(--ground);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .plate {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 20px;
+    color: #FAF7F3;
+    overflow: hidden;
+    transition: transform 0.25s ease;
+  }
+  .plate:hover { transform: translateY(-4px); }
+  .plate::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      115deg,
+      rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px,
+      transparent 1px, transparent 5px
+    );
+    pointer-events: none;
+  }
+  .plate.tone-a { background: linear-gradient(160deg, var(--plate-a), color-mix(in srgb, var(--plate-a) 60%, #000)); }
+  .plate.tone-b { background: linear-gradient(160deg, var(--plate-b), color-mix(in srgb, var(--plate-b) 55%, #000)); }
+  .plate.tone-c { background: linear-gradient(160deg, var(--plate-c), color-mix(in srgb, var(--plate-c) 55%, #000)); }
+  .plate.tone-d { background: linear-gradient(160deg, var(--plate-d), color-mix(in srgb, var(--plate-d) 55%, #000)); }
+  .plate .no {
+    font-family: var(--display);
+    font-size: 64px; line-height: 1;
+    opacity: 0.9;
+  }
+  .plate .meta { position: relative; }
+  .plate .cat {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0.75; display: block; margin-bottom: 6px;
+  }
+  .plate .title {
+    font-family: var(--display);
+    font-size: 21px; line-height: 1.2; margin: 0;
+  }
+  .plate[hidden] { display: none; }
+  .grid-note {
+    margin-top: 20px; font-size: 13px; color: var(--ink-soft);
+  }
+
+  /* ---------- about ---------- */
+  .about { background: var(--ground-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .about-cols {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px;
+    align-items: start;
+  }
+  .about-cols p { max-width: 58ch; margin: 0 0 1em; }
+  .about-cols p:last-child { margin-bottom: 0; }
+  blockquote {
+    font-family: var(--display);
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.3;
+    margin: 0;
+    text-wrap: balance;
+  }
+  blockquote em { color: var(--accent); }
+
+  /* ---------- services ---------- */
+  .streams {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    margin-bottom: 48px;
+  }
+  .stream {
+    border: 1px solid var(--line);
+    padding: 32px 28px;
+  }
+  .stream h3 {
+    font-family: var(--display); font-weight: 400;
+    font-size: 26px; margin: 10px 0 12px;
+  }
+  .stream p { color: var(--ink-soft); margin: 0; font-size: 15px; }
+  .svc-list { border-top: 1px solid var(--line); }
+  .svc {
+    display: grid; grid-template-columns: 1fr 2fr auto;
+    gap: 24px; align-items: baseline;
+    padding: 22px 4px;
+    border-bottom: 1px solid var(--line);
+  }
+  .svc-name { font-family: var(--display); font-size: 22px; }
+  .svc-desc { color: var(--ink-soft); font-size: 15px; }
+
+  /* ---------- contact ---------- */
+  .contact { text-align: center; padding: 96px 0; }
+  .contact h2 { font-size: clamp(40px, 6vw, 64px); margin-bottom: 16px; }
+  .contact p { color: var(--ink-soft); max-width: 42ch; margin: 0 auto 32px; }
+  .contact-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0;
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  footer .wrap {
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    width: 100%;
+  }
+  footer span { font-size: 12px; color: var(--ink-soft); }
+
+  @media (max-width: 760px) {
+    .nav-links { display: none; }
+    .about-cols, .streams { grid-template-columns: 1fr; }
+    .svc { grid-template-columns: 1fr; gap: 4px; }
+    section { padding: 56px 0; }
+  }
+</style>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="#top">Kewa</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero" style="border-bottom:none; padding-bottom:0;">
+      <div class="eyebrow"><span class="label">Asal Dianat · Styling &amp; Couture</span></div>
+      <h1>Kewa<span class="amp">.</span></h1>
+      <div class="hero-foot">
+        <p class="hero-thesis">
+          Styling appointments, couture commissions, and a ready-to-wear line
+          made to order — from studio collections to one-of-one pieces. Every
+          garment begins with the person who will wear it.
+        </p>
+        <div class="hero-cta">
+          <a class="btn solid" href="#contact">Book an appointment</a>
+          <a class="btn" href="#work">View the work</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section id="work">
+      <div class="sec-head">
+        <h2>Selected Work</h2>
+        <div class="filters" role="group" aria-label="Filter portfolio">
+          <button class="chip" data-filter="all" aria-pressed="true">All</button>
+          <button class="chip" data-filter="studio" aria-pressed="false">Studio</button>
+          <button class="chip" data-filter="independent" aria-pressed="false">Independent</button>
+        </div>
+      </div>
+      <div class="grid" id="grid">
+        <figure class="plate tone-a" data-cat="studio">
+          <span class="no">01</span>
+          <figcaption class="meta">
+            <span class="cat">Studio · Ready-to-wear</span>
+            <p class="title">Spring capsule, eight looks</p>
+          </figcaption>
+        </figure>
+        <figure class="plate tone-c" data-cat="independent">
+          <span class="no">02</span>
+          <figcaption class="meta">
+            <span class="cat">Independent · Custom design</span>
+            <p class="title">Evening gown, silk charmeuse</p>
+          </figcaption>
+        </figure>
+        <figure class="plate tone-b" data-cat="independent">
+          <span class="no">03</span>
+          <figcaption class="meta">
+            <span class="cat">Independent · Personal styling</span>
+            <p class="title">Wardrobe edit &amp; rebuild</p>
+          </figcaption>
+        </figure>
+        <figure class="plate tone-d" data-cat="studio">
+          <span class="no">04</span>
+          <figcaption class="meta">
+            <span class="cat">Studio · Editorial</span>
+            <p class="title">Lookbook styling, FW collection</p>
+          </figcaption>
+        </figure>
+        <figure class="plate tone-b" data-cat="independent">
+          <span class="no">05</span>
+          <figcaption class="meta">
+            <span class="cat">Independent · Bridal</span>
+            <p class="title">Bridal alteration &amp; veil</p>
+          </figcaption>
+        </figure>
+        <figure class="plate tone-a" data-cat="studio">
+          <span class="no">06</span>
+          <figcaption class="meta">
+            <span class="cat">Studio · Fittings</span>
+            <p class="title">Client fittings, made-to-measure</p>
+          </figcaption>
+        </figure>
+        <figure class="plate tone-d" data-cat="independent">
+          <span class="no">07</span>
+          <figcaption class="meta">
+            <span class="cat">Independent · Event</span>
+            <p class="title">Gala look, head to toe</p>
+          </figcaption>
+        </figure>
+        <figure class="plate tone-c" data-cat="studio">
+          <span class="no">08</span>
+          <figcaption class="meta">
+            <span class="cat">Studio · Ready-to-wear</span>
+            <p class="title">Tailored suiting series</p>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="grid-note">Photographs of each look are being added here — meanwhile, see the full archive on <a href="https://instagram.com/kewa_design" rel="noopener">Instagram @kewa_design</a>.</p>
+    </section>
+  </div>
+
+  <section class="about" id="about">
+    <div class="wrap about-cols">
+      <blockquote>“Clothes should fit the life, <em>not just the body.</em>”</blockquote>
+      <div>
+        <p>
+          Asal Dianat is a stylist and couture designer working across two
+          worlds: collection work through the studio, and independent
+          commissions for private clients — couture pieces, styling
+          appointments, and made-to-order garments under the Kewa label.
+        </p>
+        <p>
+          Trained in pattern-making and construction, she works from fitting to
+          finish. Studio clients get collection-level polish; private clients
+          get a piece nobody else has.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section id="services">
+      <div class="sec-head"><h2>Services</h2></div>
+      <div class="streams">
+        <div class="stream">
+          <span class="label">Through the studio</span>
+          <h3>Studio work</h3>
+          <p>Collection design, editorial and lookbook styling, made-to-measure fittings. Inquiries routed through the studio.</p>
+        </div>
+        <div class="stream">
+          <span class="label">Direct commissions</span>
+          <h3>Independent work</h3>
+          <p>Private clients, booked directly: styling appointments, couture commissions, and Kewa pieces made to order.</p>
+        </div>
+      </div>
+      <div class="svc-list">
+        <div class="svc">
+          <span class="svc-name">Styling appointment</span>
+          <span class="svc-desc">One-on-one session: wardrobe edit, fit assessment, and looks built around how you actually dress.</span>
+          <span class="label">By appointment</span>
+        </div>
+        <div class="svc">
+          <span class="svc-name">Couture design</span>
+          <span class="svc-desc">One-of-one garments from sketch to final fitting. Fabric sourcing included.</span>
+          <span class="label">By commission</span>
+        </div>
+        <div class="svc">
+          <span class="svc-name">Ready to wear</span>
+          <span class="svc-desc">Pieces from the Kewa collection, finished and available now.</span>
+          <span class="label">In stock</span>
+        </div>
+        <div class="svc">
+          <span class="svc-name">Made to order</span>
+          <span class="svc-desc">Any collection piece cut to your measurements, in your fabric.</span>
+          <span class="label">By order</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="contact" id="contact">
+      <span class="label">Bookings open</span>
+      <h2>Let’s make something<br>that fits.</h2>
+      <p>Appointments and commissions by message. Reach out with what you have in mind — a photo, a sketch, or just an occasion.</p>
+      <div class="contact-row">
+        <a class="btn solid" href="https://wa.me/447448983893" rel="noopener">WhatsApp</a>
+        <a class="btn" href="https://instagram.com/kewa_design" rel="noopener">Instagram @kewa_design</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Kewa — Asal Dianat, Styling &amp; Couture</span>
+    <span>Studio &amp; independent commissions</span>
+  </div>
+</footer>
+
+<script>
+  const chips = document.querySelectorAll(".chip");
+  const plates = document.querySelectorAll(".plate");
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+      const f = chip.dataset.filter;
+      plates.forEach((p) => {
+        p.hidden = f !== "all" && p.dataset.cat !== f;
+      });
+    });
+  });
+</script>
