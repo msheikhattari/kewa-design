@@ -1,0 +1,64 @@
+name: Ingest issue photos
+
+on:
+  issue_comment:
+    types: [created, edited]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ingest-photos
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.issue.number == 1 }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Download photo attachments from issue 1 comments
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p photos
+          gh api "repos/${{ github.repository }}/issues/1/comments" --paginate --jq '.[].body' > /tmp/bodies.txt || true
+          gh api "repos/${{ github.repository }}/issues/1" --jq '.body' >> /tmp/bodies.txt || true
+          grep -oE 'https://github\.com/user-attachments/assets/[A-Za-z0-9-]+' /tmp/bodies.txt | sort -u > /tmp/urls.txt || true
+          grep -oE 'https://user-images\.githubusercontent\.com/[A-Za-z0-9./_-]+' /tmp/bodies.txt | sort -u >> /tmp/urls.txt || true
+          touch /tmp/urls.txt
+          while read -r url; do
+            [ -z "$url" ] && continue
+            id=$(basename "$url" | tr -cd 'A-Za-z0-9-' | cut -c1-40)
+            if ls photos/att-"$id".* >/dev/null 2>&1; then
+              echo "skip $id (already ingested)"
+              continue
+            fi
+            tmp=$(mktemp)
+            curl -sL -H "Authorization: token $GH_TOKEN" -o "$tmp" "$url" || { rm -f "$tmp"; continue; }
+            type=$(file -b --mime-type "$tmp")
+            case "$type" in
+              image/jpeg) ext=jpg ;;
+              image/png)  ext=png ;;
+              image/webp) ext=webp ;;
+              image/heic) ext=heic ;;
+              image/heif) ext=heic ;;
+              *) echo "skip $id (type $type)"; rm -f "$tmp"; continue ;;
+            esac
+            mv "$tmp" "photos/att-$id.$ext"
+            echo "saved photos/att-$id.$ext"
+          done < /tmp/urls.txt
+
+      - name: Commit new photos
+        run: |
+          git config user.name "kewa-photo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add photos
+          git diff --cached --quiet && echo "nothing new" || {
+            git commit -m "Ingest photos from issue #1 comments"
+            git push
+          }
