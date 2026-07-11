@@ -221,6 +221,20 @@
     font-size: 16px; line-height: 1.25; margin: 0;
   }
   .plate[hidden] { display: none; }
+  .plate.photo { padding: 0; }
+  .plate.photo::after { display: none; }
+  .plate.photo img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .plate.photo:hover img { transform: scale(1.03); }
+  .plate.photo .meta {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 14px;
+    background: linear-gradient(transparent, rgba(15, 8, 10, 0.65));
+  }
   .grid-note {
     margin-top: 18px; font-size: 13px; color: var(--ink-soft);
   }
@@ -324,6 +338,8 @@
     }
     .grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
     .plate { padding: 20px; }
+    .plate.photo { padding: 0; }
+    .plate.photo .meta { padding: 20px; }
     .plate .no { font-size: 64px; }
     .plate .cat { font-size: 10px; letter-spacing: 0.2em; margin-bottom: 6px; }
     .plate .title { font-size: 21px; }
@@ -386,11 +402,11 @@
         </div>
       </div>
       <div class="grid" id="grid">
-        <figure class="plate tone-a" data-cat="studio">
-          <span class="no">01</span>
+        <figure class="plate photo" data-cat="independent">
+          <img src="photos/web/rtw-01.jpg" alt="Kewa ready-to-wear — oxblood blouse with black lace sleeves, worn at the Louvre">
           <figcaption class="meta">
-            <span class="cat">Studio · Ready-to-wear</span>
-            <p class="title">Spring capsule, eight looks</p>
+            <span class="cat">Kewa · Ready-to-wear</span>
+            <p class="title">Oxblood blouse, black lace</p>
           </figcaption>
         </figure>
         <figure class="plate tone-c" data-cat="independent">
